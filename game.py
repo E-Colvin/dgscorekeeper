@@ -1,8 +1,9 @@
 from constants import *
 
 class Round():
-    def __init__(self,player = NAME):
-        self.player =player
+    def __init__(self, course, player = NAME):
+        self.course = course
+        self.player = player
 
 class Course():
     def __init__(self,name,num_holes = 18):
@@ -13,11 +14,17 @@ class Course():
             self.holes.append(Hole(i))
 
     def __repr__(self):
-        rep = f"{self.course_name}:\n\n"
+        rep = f"{self.course_name}:\n Par = {self.get_par()}\n\n"
         for i in range(self.num_holes):
             rep += str(self.holes[i]) +"\n"
         
         return rep
+
+    def get_par(self):
+        par = 0
+        for i in range(self.num_holes):
+            par += self.holes[i].par
+        return par
 
 class Hole():
     def __init__(self, number, par = 3,distance = -1):
